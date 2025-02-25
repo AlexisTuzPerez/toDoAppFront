@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0px;
+
+    background-color: black !important;
+
+    font-family: "Hanuman",  serif;
+
+
+
+    overflow-y: auto;
+
+
+
+}
+  
+
+
+.main{
+
+    flex: 1;
+
+    height: 90vh; 
+
+
+    width: 100vw;
+
+    color: white;
+    
+    
+   /*  overflow-y: auto; */
+
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+

@@ -1,0 +1,56 @@
+
+
+
+.header{
+
+    display: flex;
+    flex-direction:  row;
+    align-items: center;
+
+
+    height: 10vh;
+
+    width: 100vw;
+
+
+    color: white;
+
+    background-color: black;
+
+    border-bottom: 2px  white solid;
+
+
+
+
+}
+
+
+.h1{
+
+
+
+
+
+    border-right: 1px solid black;
+    padding-right: 20px;
+    padding-left:20px;
+    margin: 0px;
+
+    font-size: 40px;
+}
+
+
+
+
+
+@media (max-width: 600px){
+
+    .h1{
+        font-size: 15px;
+    }
+    
+}
+
+
+
+

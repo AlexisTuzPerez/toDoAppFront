@@ -1,0 +1,203 @@
+
+
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: row;
+    padding-bottom: 2rem; 
+}
+
+
+.mainContent{
+    display: flex;
+    flex-direction:row
+}
+
+.main:last-child {
+    height: auto;
+    min-height: 100vh;
+}
+
+
+.mainText{
+
+    font-weight: bold;
+
+    font-size: 70px;
+    color: white;
+}
+
+.secondaryText{
+    color: #00FFFF;
+    font-size: 40px;
+}
+
+
+.photo{
+
+    margin-left: 70px;
+
+
+    height: 280px;
+    width: auto;
+}
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+  
+.light {
+    position: absolute;
+    bottom: -3%;
+    right: 5%;
+    height: 578px;
+    width: auto;
+  
+}
+  
+
+.why{
+    color: #00FFFF;
+}
+
+
+.card{
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    border: 2px solid white;
+
+    width: 250px;
+    height: 200px;
+
+    margin-bottom: 70px;
+
+    font-size: 15px;
+
+    transition: all 0.2s ease-in-out;
+
+}
+
+
+.card:hover{
+    color: #00FFFF;
+    border-color: #00FFFF;
+}
+
+
+.icon{
+
+    color: white;
+    height: 75px;
+    margin-top: 15px;
+    transition: all 0.2s ease-in-out;
+
+
+}
+
+.icon:hover{
+    color: #00FFFF;
+}
+
+
+.cardsBox{
+    display: flex;
+
+
+    justify-content: space-around;
+
+    align-items: center;
+
+
+
+    flex-direction: row;
+
+    width: 100vw;
+
+
+  
+ 
+
+
+    
+}
+
+
+.imgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media (max-width: 1000px){
+    .mainText{
+        font-size: 40px;
+    }
+
+    .photo{
+        height: 200px;
+        margin: 0px;
+
+    }
+    .light{
+        height: 350px;
+
+        bottom: -20%;
+
+
+    }
+    .mainContent{
+
+        gap: 40px;
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 700px) {
+   /*  .light, .photo {
+        display: none;
+    } */
+
+
+    .photo{
+        height: 150px;
+
+
+    }
+    .cardsBox {
+        flex-direction: column;
+    }
+
+    .mainText, .secondaryText {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    
+    /* Add padding for mobile */
+    .main {
+        padding: 2rem 0;
+    }
+    .icon{
+        height: 60px;
+    }
+
+    .card{
+        width: 150px;
+        height: 120px;
+    
+        margin-bottom: 35px;
+    
+        font-size: 10px;
+    }
+}

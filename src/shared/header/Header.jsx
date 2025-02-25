@@ -1,0 +1,57 @@
+
+
+import LinkButton from "../linkButton/LinkButton";
+import styles from "./Header.module.css";
+
+
+
+
+function Header(){
+    return (
+        <>
+
+            <header>
+                <div className={styles.header}>
+                    <h1 className={styles.h1}> To Do App</h1>
+                    <LinkButton link={"/"} text={"Home"} color={"blackButton"}></LinkButton>
+
+
+
+                   {/*  <div className=""></div> */}
+                    <div style={{ display: "flex", flex: 1 }}></div>
+
+
+                    <LinkButton link={"/demo"} text={"Demo"} color={"whiteButton"}></LinkButton>
+
+
+
+
+
+
+                    <LinkButton link={"/signIn"} text={"Sign In"} color={"blackButton"}></LinkButton>
+
+                    <LinkButton link={"/signUp"} text={"Get Started"} color={"blueButton"}></LinkButton>
+
+
+
+                    
+
+                    
+
+
+
+
+                    
+
+
+                </div>
+                    
+            </header>
+
+        </>
+    )
+}
+
+
+
+export default Header
