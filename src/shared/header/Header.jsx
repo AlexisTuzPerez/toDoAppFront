@@ -13,7 +13,7 @@ function Header(){
             <header>
                 <div className={styles.header}>
                     <h1 className={styles.h1}> To Do App</h1>
-                    <LinkButton link={"/"} text={"Home"} color={"blackButton"}></LinkButton>
+
 
 
 
