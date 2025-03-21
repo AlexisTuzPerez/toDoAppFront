@@ -8,7 +8,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 import LinkButton from "../../shared/linkButton/LinkButton";
 
-function Aside({setFilteredTasks, tasks}){
+function Aside({setFilteredTasks, setFilterText,tasks}){
 
     
 
@@ -26,19 +26,28 @@ function Aside({setFilteredTasks, tasks}){
 
         if(priority == "COMPLETED"){
             filtered = tasks.filter( task => task.status === true)
+
+            setFilterText(priority)
+
+            
             return setFilteredTasks(filtered)
 
         } 
 
         
         filtered = tasks.filter( task => task.status === false)
+        setFilterText("All Tasks")
         
 
         if(priority){
 
+            setFilterText(priority)
             filtered = filtered.filter( task => task.priority === priority )
 
         } 
+
+
+
 
         
 
@@ -100,6 +109,7 @@ function Aside({setFilteredTasks, tasks}){
 
 Aside.propTypes ={
     setFilteredTasks: PropTypes.func.isRequired,
+    setFilterText: PropTypes.func.isRequired,
     tasks: PropTypes.array.isRequired
 }
 

@@ -1,0 +1,60 @@
+
+
+
+
+
+
+
+
+
+.form{
+
+    font-size: 25px;
+  
+  
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+
+  
+}
+
+
+.input{
+    resize: none; 
+    overflow-y: hidden;
+ 
+    font-family: "Hanuman",  serif;
+
+ 
+    background-color: black;
+    color: white;
+
+
+    border: 2px solid white;
+
+
+    min-height: 30px;
+    width: 250px;
+    font-size: 14px;
+    border-radius: 5px;
+
+}
+
+
+.strong{
+    font-size: 25px;
+}
+
+.input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+  
+  /* For Firefox */
+.input::-moz-calendar-picker-indicator {
+    filter: invert(1);
+  }

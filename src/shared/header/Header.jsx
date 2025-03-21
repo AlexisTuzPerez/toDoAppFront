@@ -30,7 +30,7 @@ function Header(){
 
                     <LinkButton link={"/signIn"} text={"Sign In"} color={"blackButton"}></LinkButton>
 
-                    <LinkButton link={"/signUp"} text={"Get Started"} color={"blueButton"}></LinkButton>
+                    <LinkButton link={"/signUp"} text={"Register"} color={"blueButton"}></LinkButton>
 
 
 

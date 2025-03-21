@@ -3,13 +3,17 @@
 import { useState } from "react"
 import styles from "./Demo.module.css"
 
-import LinkButton from "../shared/linkButton/LinkButton"
 
 
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import Aside from "./Aside/Aside"
+import Aside from "./aside/Aside"
+
+
+import AddButton from "./addButton/AddButton"
+import DeleteButton from "./deleteButton/DeleteButton"
+import EditButton from "./editButton/EditButton"
 
 
 function DemoMain(){
@@ -65,7 +69,7 @@ function DemoMain(){
                 "accountNonExpired": true,
                 "accountNonLocked": true
             },
-            "title": "Firssst ",
+            "title": "second ",
             "description": "first tast",
             "priority": "MEDIUM",
             "dateAdded": "2025-02-22",
@@ -92,7 +96,7 @@ function DemoMain(){
                 "accountNonExpired": true,
                 "accountNonLocked": true
             },
-            "title": "Firssst ",
+            "title": "third ",
             "description": "first tast",
             "priority": "LOW",
             "dateAdded": "2025-02-22",
@@ -119,7 +123,7 @@ function DemoMain(){
                 "accountNonExpired": true,
                 "accountNonLocked": true
             },
-            "title": "Firssst ",
+            "title": "fourth ",
             "description": "first tast",
             "priority": "LOW",
             "dateAdded": "2025-02-22",
@@ -145,7 +149,7 @@ function DemoMain(){
                 "accountNonExpired": true,
                 "accountNonLocked": true
             },
-            "title": "Firssst ",
+            "title": "fifth ",
             "description": "first tast",
             "priority": "LOW",
             "dateAdded": "2025-02-22",
@@ -184,7 +188,24 @@ function DemoMain(){
 
 
 
-   const filtered = data.filter( task => task.status === false)
+    const [tasks, setTasks] = useState(data)
+
+
+    const loadProducts = async () =>{
+
+
+        setTasks(data)
+
+
+        console.log("loadProducts")
+
+    }
+
+
+    const filtered = data.filter( task => task.status === false)
+
+
+    const [filterText, setFilterText] = useState("All Tasks")
 
 
     const[filteredTasks, setFilteredTasks] = useState(filtered)
@@ -270,7 +291,32 @@ switch (selectedFilter) {
    
        
    
-       };
+    };
+
+    const changeStatus = (taskToUpdate) => {
+        // Update the tasks array
+        const updatedFilteredTasks = filteredTasks.map(task => 
+          task.id === taskToUpdate.id ? {...task, status: !task.status} : task
+
+
+        );
+
+
+        const updatedTasks = tasks.map( task =>
+            task.id === taskToUpdate.id ? {...task, status: !task.status} : task
+
+        );
+
+
+        //fetch  and load tasks rather than  setTasks
+        setTasks(updatedTasks); 
+
+        //loadProducts
+  
+        // Update filteredTasks to exclude completed tasks
+        setFilteredTasks(updatedFilteredTasks/* .filter(task => !task.status) */);
+    };
+        
        
 
 
@@ -286,7 +332,7 @@ switch (selectedFilter) {
 
 
   
-            <Aside     setFilteredTasks={setFilteredTasks}  tasks={data}  ></Aside>
+            <Aside     setFilteredTasks={setFilteredTasks}  setFilterText={setFilterText} tasks={tasks}  ></Aside>
 
             
 
@@ -296,9 +342,12 @@ switch (selectedFilter) {
 
 
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center", width: "60vw", marginTop: "50px", marginBottom: "40px"}}>
-                    <h2 style={{fontSize: "25px"}}>All Tasks</h2>
+                    <h2 style={{fontSize: "25px"}}>{filterText}</h2>
                     <div style={{ display: "flex", flex: 1 }}></div>
-                    <LinkButton link={"/demo"} text={"Add Task"} color={"blueButton"} ></LinkButton>
+
+
+                    <AddButton color={"blueButton"} loadProducts={loadProducts}></AddButton>
+                   {/*  <LinkButton link={"/demo"} text={"Add Task"} color={"blueButton"} ></LinkButton> */}
                 </div>
 
                 
@@ -316,7 +365,9 @@ switch (selectedFilter) {
 
 
                             <div  className={styles.priority}  style={priorityColor(task.priority, task.status)}/>
-                            <button className={styles.checkbox} type="chekbox"  style={{backgroundColor: task.status ? "white" : "black" }}  />
+
+
+                            <button className={styles.checkbox} type="chekbox"  style={{backgroundColor: task.status ? "white" : "black" }}  onClick={ () => changeStatus(task)}/>
 
 
                             <div  style={{display: "flex", flexDirection: "column"}}>
@@ -340,10 +391,14 @@ switch (selectedFilter) {
                             <div style={{display:"flex", flex: "1"}}/>
 
 
-                            <button className={`${styles.btn} ${styles["blueButton"]}`}> <strong>Edit</strong>    </button>
+
+                            <EditButton color="blueButton" task={task} loadProducts={loadProducts}></EditButton>
 
 
-                            <button className={`${styles.btn} ${styles["whiteButton"]}`}> <strong>Delete</strong>    </button>
+                            <DeleteButton color="whiteButton" loadProducts={loadProducts}></DeleteButton>
+
+
+
 
                         </div>
 
@@ -354,6 +409,7 @@ switch (selectedFilter) {
                         <div className={styles.descriptionBox}  style={{ display: selectedTaskId === task.id ? "flex" : "none" }}> 
 
                             <p className={styles.descriptionP}>
+                                {task.description}
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae natus amet expedita blanditiis mollitia quo ipsa, inventore, modi, accusantium neque porro minus debitis alias ipsum. Voluptate, quis! Voluptas, voluptate vero.
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae natus amet expedita blanditiis mollitia quo ipsa, inventore, modi, accusantium neque porro minus debitis alias ipsum. Voluptate, quis! Voluptas, voluptate vero.
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae natus amet expedita blanditiis mollitia quo ipsa, inventore, modi, accusantium neque porro minus debitis alias ipsum. Voluptate, quis! Voluptas, voluptate vero.
