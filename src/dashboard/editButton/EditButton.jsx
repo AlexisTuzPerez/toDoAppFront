@@ -4,7 +4,7 @@
 
 import { useState } from "react"
 
-import TaskForm from "../taskForm/taskForm"
+import TaskForm from "../taskForm/TaskForm.jsx"
 
 import PropTypes from "prop-types"
 import styles from "./EditButton.module.css"

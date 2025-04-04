@@ -2,11 +2,11 @@
 
 import PropTypes from "prop-types";
 import { useState } from "react";
-import SaveButton from "../saveButton/saveButton";
+import SaveButton from "../saveButton/SaveButton";
 import styles from "./TaskForm.module.css";
 
 import { useEffect, useRef } from 'react';
-
+import { addTask, updateTask } from "../../services/TasksRequest";
 
 function TaskForm({setModalOpen, task , typeForm,loadProducts}){
 
@@ -33,21 +33,52 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
 
         setFormData( (prevData)=> ( {
             ...prevData,
-
             [name]: value
-
             
         }))
 
 
 
+
+
     }
+
+
+
+
+
+
+
 
     const handleSave =  async (e) =>{
         e.preventDefault()
-        loadProducts()
+
+        if(typeForm === "add"){
+
+
+            await addTask(formData)
+
+            
+         
+        } else{
+
+
+            await updateTask(formData)
+        
+        }
+
+
         setModalOpen(false)
-        console.log("save")
+        loadProducts()
+
+
+
+
+
+    
+       
+
+     
     }
 
 
@@ -61,9 +92,6 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
 
 
         }
-
-
-
     
     }
 
@@ -81,6 +109,8 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
 
 
 
+    const today = new Date().toISOString().split('T')[0];
+
     return(
 
         <form className={styles.form}  onSubmit={handleSave}>
@@ -89,7 +119,7 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
 
 
             <label htmlFor="title"> Title </label> 
-
+            
 
             <input 
                 className={styles.input}
@@ -99,6 +129,7 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
                 value={formData.title}
                 onChange={handleInput}
                 style={inputStyle("title")}
+                required
     
             />
 
@@ -113,6 +144,8 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
                 value={formData.priority}
                 onChange={handleInput}
                 style={inputStyle("priority")}
+                required
+
 
 
         
@@ -140,6 +173,8 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
                 style={inputStyle("description")}
                 ref={textareaRef}
                 rows={1}
+                required
+
             
             />
 
@@ -151,10 +186,13 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
                 className={styles.input}
                 type="date"
                 id="dueDate"
-                name="dueDate"  
+                name="dueDate" 
+                min={today} 
                 value={formData.dueDate}    
                 onChange={handleInput}
                 style={inputStyle("dueDate")}
+                required
+
 
                 
             
@@ -175,7 +213,6 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
 
     )
 }
-
 
 TaskForm.propTypes={
     setModalOpen: PropTypes.func.isRequired,

@@ -4,19 +4,24 @@
 import PropTypes from "prop-types";
 import styles from "./DeleteButton.module.css";
 
+import { deleteTask } from "../../services/TasksRequest";
 
 
+function DeleteButton({color, loadProducts, taskId}){
 
 
-function DeleteButton({color, loadProducts}){
+    const fetchDelete =  async () =>{
 
-
-    const fetchDelete = () =>{
-
-
-        console.log("delete")
-
+        await deleteTask(taskId)
         loadProducts()
+
+
+     
+
+
+        
+
+
     }
 
     return(
@@ -34,7 +39,8 @@ function DeleteButton({color, loadProducts}){
 
 DeleteButton.propTypes ={
     color: PropTypes.string.isRequired,
-    loadProducts: PropTypes.func.isRequired
+    loadProducts: PropTypes.func.isRequired,
+    taskId: PropTypes.number.isRequired
 }
 
 

@@ -21,16 +21,16 @@ function Header(){
                     <div style={{ display: "flex", flex: 1 }}></div>
 
 
-                    <LinkButton link={"/demo"} text={"Demo"} color={"whiteButton"}></LinkButton>
+                    {/* <LinkButton link={"/demo"} text={"Demo"} color={"whiteButton"}></LinkButton> */}
 
 
 
 
 
 
-                    <LinkButton link={"/signIn"} text={"Sign In"} color={"blackButton"}></LinkButton>
+                    <LinkButton link={"/logIn"} text={"Log In"} color={"blackButton"}></LinkButton>
 
-                    <LinkButton link={"/signUp"} text={"Register"} color={"blueButton"}></LinkButton>
+                    <LinkButton link={"/register"} text={"Register"} color={"blueButton"}></LinkButton>
 
 
 

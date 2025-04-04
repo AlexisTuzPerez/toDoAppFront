@@ -6,14 +6,14 @@ import Footer from "../shared/footer/Footer.jsx"
 
 
 
-import DemoMain from "./DemoMain.jsx"
+import DemoMain from "./DashboardMain.jsx"
 
 
 
 
 
 
-function Demo (){
+function Dashboard (){
     return(
         <>
             {/* <Header></Header> {/* otro header */}
@@ -31,4 +31,4 @@ function Demo (){
 }
 
 
-export default Demo 
+export default Dashboard 

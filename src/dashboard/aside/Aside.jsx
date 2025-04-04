@@ -2,13 +2,38 @@
 
 import styles from "./Aside.module.css";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
-import LinkButton from "../../shared/linkButton/LinkButton";
+import { useAuth } from "../../context/AuthContext";
+
+import { useNavigate } from "react-router-dom";
 
 function Aside({setFilteredTasks, setFilterText,tasks}){
+
+    const {user,logout} = useAuth()
+
+    const navigate = useNavigate()
+
+
+
+    const handleLogout =  async () =>{
+
+
+        try {
+            await logout()
+            navigate("/")
+            console.log("logout succesful")
+
+            
+        } catch (error) {
+
+            console.log("Error in the log out", error)
+            
+        }
+
+
+
+    }
 
     
 
@@ -71,12 +96,13 @@ function Aside({setFilteredTasks, setFilterText,tasks}){
  
             <div style={{display: "flex", alignItems: "center", justifyContent: "center", padding: "5px"}}>
  
-            <h1 className={styles.h1}>To Do App</h1>
-                <div style={{ display: "flex", flex: 1, width:"30px" }}></div>
-                <FontAwesomeIcon icon={faBars} className={styles.icon}/>
+            {/* <FontAwesomeIcon icon={faUser} className={styles.icon}/> */}
+            <h1 className={styles.h1}>{user}</h1>
+        {/*         <div style={{ display: "flex", flex: 1, width:"30px" }}></div>
+                 */}
                      
  
-                </div>
+            </div>
  
  
             <nav className={styles.nav}>
@@ -91,8 +117,10 @@ function Aside({setFilteredTasks, setFilterText,tasks}){
             </nav>
  
             <br/>
+
+            <button className={styles.button} onClick={handleLogout}> <strong> Log Out</strong>    </button>
  
-            <LinkButton link={"/"} text={"Log Out"} color={"blueButton"} ></LinkButton>
+           {/*  <LinkButton link={"/"} text={"Log Out"} color={"blueButton"} ></LinkButton> */}
                  
              <br/>
  
