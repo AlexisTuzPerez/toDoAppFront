@@ -1,10 +1,8 @@
-
-
 import { useEffect, useState } from "react"
 import styles from "./Demo.module.css"
 
 
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faEllipsis, faPencilAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Aside from "./aside/Aside"
@@ -188,7 +186,34 @@ function DashboardMain(){
                             <div  className={styles.priority}  style={priorityColor(task.priority, task.status)}/>
 
 
-                            <button className={styles.checkbox} type="chekbox"  style={{backgroundColor: task.status ? "white" : "black" }}  onClick={ () => changeStatus(task)}/>
+                            <button 
+                                className={styles.checkbox} 
+                                onClick={() => changeStatus(task)}
+                                style={{
+                                    backgroundColor: task.status ? 'white' : 'transparent',
+                                    border: '2px solid white',
+                                    borderRadius: '50%',
+                                    width: '20px',
+                                    height: '20px',
+                                    transition: 'all 0.3s ease',
+                                    position: 'relative',
+                                    flexShrink: 0
+                                }}
+                            >
+                                {task.status && (
+                                    <FontAwesomeIcon 
+                                        icon={faCheck} 
+                                        style={{
+                                            color: '#000',
+                                            position: 'absolute',
+                                            left: '50%',
+                                            top: '50%',
+                                            transform: 'translate(-50%, -50%)',
+                                            fontSize: '12px'
+                                        }}
+                                    />
+                                )}
+                            </button>
 
 
                             <div  style={{display: "flex", flexDirection: "column"}}>
@@ -213,10 +238,28 @@ function DashboardMain(){
 
 
 
-                            <EditButton color="blueButton" task={task} loadProducts={loadProducts}></EditButton>
+                            <div style={{display: 'flex', gap: '0.5rem', alignItems: 'center'}}>
+                              
 
-
-                            <DeleteButton color="whiteButton" loadProducts={loadProducts}  taskId={task.id}   ></DeleteButton>
+                                <EditButton 
+                                    color="blueButton"
+                                    task={task} 
+                                    loadProducts={loadProducts}
+                                    style={{padding: '0.5rem 1rem', transition: 'all 0.3s ease'}}
+                                >
+                                    <FontAwesomeIcon icon={faPencilAlt} style={{marginRight: '0.5rem'}}/>
+                                    Edit
+                                </EditButton>
+                                <DeleteButton
+                                    color="whiteButton"
+                                    loadProducts={loadProducts}
+                                    taskId={task.id}
+                                    style={{padding: '0.5rem 1rem', transition: 'all 0.3s ease'}}
+                                >
+                                    <FontAwesomeIcon icon={faTrashAlt} style={{marginRight: '0.5rem'}}/>
+                                    Delete
+                                </DeleteButton>
+                            </div>
 
 
 
