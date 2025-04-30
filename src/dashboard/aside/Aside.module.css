@@ -1,173 +1,91 @@
 .sideBar {
-
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
-
     align-items: center;
+
+    width: 240px;
+    /* height: 100vh; */
+    background: #000000;
     color: white;
-
-
-    width: 20vw;
-    height: 100vh;
-    background-color: black;
-
-    border-right: 2px solid white;
-
-
-
-
+    border-right: 1px solid #e0e0e0;
+    padding: 2rem 1rem;
 }
 
-
-.h1{
-
-
-
-
-
-  
+.h1 {
+    color:white;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
     padding-right: 20px;
-    padding-left:20px;
-    
-
-    font-size: 20px;
-
-
-
+    padding-left: 20px;
 }
 
-
-.icon{
+.icon {
     color: #00FFFF;
-
     height: 25px;
-
     transition: all 0.2s ease-in-out;
-
-
-
 }
 
-.icon:hover{
-
+.icon:hover {
     color: white;
-
-
 }
 
-nav{
+nav {
     display: flex;
-
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex: 1;
 }
 
-
-li{
-
-
-    padding-top: 12px;
-    padding-bottom: 12px;
-
+nav ul li {
     display: flex;
     justify-content: center;
-
-
+    align-items: center;
+    padding: 0.8rem;
+    margin: 0.3rem 0;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+    color: #ffffff;
     font-size: 20px;
-
-    width: 20vw;
-
-
-
-
-    border: solid  white 2px;
-    border-left: none;
-    border-right: none;
-
-
-
+    width: 100%;
+    border: none;
 }
 
-
-
-li:hover{
-
-    background-color: white;
-
-
-    color: black;
-
-    transition: all 0.2s ease-in-out;
-
-
+nav ul li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    /* color: #333; */
 }
 
-
-
-
-ul{
-
+ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-
 }
 
-
-
-
-.button{
-
-
- 
+.button {
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-
     transition: all 0.2s ease-in-out;
-
     padding: 0;
-
     height: 35px;
     width: 100px;
-
     border-radius: 5px;
-
     background-color: #00FFFF;
-
     border: 2px solid #00FFFF;
-
     color: black;
     margin-bottom: 20px;
-
-
-
-
-
-
 }
 
-.button:hover{
+.button:hover {
     background-color: white;
-
-    border-color:  white;
+    border-color: white;
 }
-
-
-
 
 @media (max-width: 768px) {
-
-    
-    
-
     .sideBar {
         width: 100vw;
         height: auto;
@@ -176,13 +94,11 @@ ul{
         border-bottom: 2px solid #ffffff;
     }
 
-
-    .h1{
+    .h1 {
         font-size: 15px;
     }
 
-
-    li{
+    nav ul li {
         width: 100vw;
     }
 }
