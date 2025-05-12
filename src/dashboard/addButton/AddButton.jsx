@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import styles from "./AddButton.module.css";
 
-import Modal from "../../shared/Modal/Modal";
+import Modal from "../../shared/modal/Modal";
 import TaskForm from "../taskForm/TaskForm";
 
 
