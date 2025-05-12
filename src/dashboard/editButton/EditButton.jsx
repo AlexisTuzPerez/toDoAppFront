@@ -9,7 +9,7 @@ import TaskForm from "../taskForm/TaskForm.jsx"
 import PropTypes from "prop-types"
 import styles from "./EditButton.module.css"
 
-import Modal from "../../shared/Modal/Modal"
+import Modal from "../../shared/modal/Modal"
 
 
 function EditButton({color,task, loadProducts}){
