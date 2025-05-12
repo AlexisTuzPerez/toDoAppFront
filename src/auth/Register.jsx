@@ -64,7 +64,7 @@ function Register(){
         try { 
             await register (formData)
 
-            navigate("/dashboard")
+            navigate("/login")
 
             
         } catch (error){

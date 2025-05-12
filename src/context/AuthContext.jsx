@@ -6,25 +6,44 @@ import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
+const BaseURL = 'http://localhost:8080'
+
+//const BaseURL = 'https://todoappnode-986b.onrender.com'
+
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); // Fixed: Added parentheses
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         verifyAuth();
     }, []);
 
     const verifyAuth = async () => {
-
         try {
-            const response = await axios.get('http://localhost:8080/api/verifyAuth', {
-                withCredentials: true // Fixed: Correct property name
+
+            const axiosInstance = axios.create({
+                baseURL: BaseURL,
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
-            setUser(response.data);
+            const response = await axiosInstance.get('/api/auth/verifyAuth');
+            
+            if (response.data && response.data.user && response.data.user.email) {
 
-
-        } catch {
+                setUser(response.data.user.email);
+            } else {
+                setUser(null);
+            }
+        } catch (error) {
+            console.error('Error verifying authentication:', error);
+            console.error('Error details:', {
+                message: error.message,
+                status: error.response?.status,
+                data: error.response?.data
+            });
             setUser(null);
         } finally {
             setLoading(false);
@@ -32,24 +51,59 @@ export function AuthProvider({ children }) {
     };
 
     const login = async (credentials) => {
-
         try {
-            await axios.post('http://localhost:8080/api/auth/authenticate', credentials, {
-                withCredentials: true 
+    
+            const axiosInstance = axios.create({
+                baseURL: BaseURL,
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                }
             });
-            await verifyAuth();
-            navigate("/dashboard");
+    
+            const response = await axiosInstance.post('/api/auth/authenticate', credentials);
+
+            const cookieHeader = response.headers['set-cookie'];
+
+            const cookies = document.cookie.split(';');
+
+            const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token=')); 
+
+            if (!tokenCookie && cookieHeader) {
+                const cookieMatch = cookieHeader.match(/token=([^;]+)/);
+                if (cookieMatch) {
+                    const tokenValue = cookieMatch[1];
+                    document.cookie = `token=${tokenValue}; path=/; SameSite=Lax`;
+                }
+            }
+
+            if (response.status === 200) {
+
+
+                await verifyAuth();
+
+                navigate("/dashboard");
+            } else {
+
+                throw new Error(`Login failed with status ${response.status}`);
+            }
         } catch (error) {
-            console.log("Login failed", error);
+            console.error('Login failed:', error);
+            console.error('Error details:', {
+                message: error.message,
+                status: error.response?.status,
+                data: error.response?.data
+            });
             throw error;
         }
     };
 
 
+
     const register = async (credentials) => {
-        console.log(credentials)
+
         try{
-            await axios.post('http://localhost:8080/api/auth/register', credentials,{
+            await axios.post(BaseURL+'/api/auth/register', credentials,{
                 withCredentials: true
             })
 
@@ -61,7 +115,7 @@ export function AuthProvider({ children }) {
 
     const logout = async () =>{
         try {
-            await axios.post('http://localhost:8080/api/auth/logout',{}, {
+            await axios.post(BaseURL+'/api/auth/logout',{}, {
                 withCredentials: true
             })
             setUser(null)
