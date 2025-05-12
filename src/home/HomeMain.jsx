@@ -32,7 +32,7 @@ function HomeMain(){
                     <div className={styles.imgContainer}>
                         <img src={demoPhoto}  className={styles.photo}  alt="Demo Photo" />
 
-                        <img src="https://www.sorteorayo.com/lightb.webp" className={styles.light} alt='haz de luz'></img>
+                       {/*  <img src="https://www.sorteorayo.com/lightb.webp" className={styles.light} alt='haz de luz'></img> */}
                     </div>
 
                 </div>

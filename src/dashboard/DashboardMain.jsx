@@ -19,6 +19,10 @@ import EditButton from "./editButton/EditButton"
 
 import axios from "axios"
 
+
+const baseURL = import.meta.env.VITE_API_URL;
+
+
 function DashboardMain(){
     const [tasks, setTasks] = useState([])
     const[filteredTasks, setFilteredTasks] = useState([])
@@ -38,6 +42,8 @@ function DashboardMain(){
         setFilteredTasks(filtered)
      
     }
+
+
 
 
     useEffect(() =>{
@@ -113,7 +119,7 @@ function DashboardMain(){
                 status: !taskToUpdate.status  // Include the flipped status
             };    
             await axios.put(
-                `http://localhost:8080/api/tasks/${taskToUpdate.id}`,
+                `${baseURL}/tasks/${taskToUpdate._id}`,
                 updatedTask,
                 {
                     withCredentials: true,
@@ -123,10 +129,10 @@ function DashboardMain(){
                 }
             );        
             const updatedFilteredTasks = filteredTasks.map(task => 
-                task.id === taskToUpdate.id ? {...task, status: !task.status } : task    
+                task._id === taskToUpdate._id ? {...task, status: !task.status } : task    
             );   
             const updatedTasks = tasks.map( task =>
-                task.id === taskToUpdate.id ? {...task, status: !task.status} : task    
+                task._id === taskToUpdate._id ? {...task, status: !task.status} : task    
             );         
             setTasks(updatedTasks);                 
             setFilteredTasks(updatedFilteredTasks);
@@ -176,11 +182,11 @@ function DashboardMain(){
                 <div className={styles.tasksBox}>
 
                     {filteredTasks.map(task =>(
+                        
+
+                        <div key={task._id} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
 
 
-                        <div key={task.id} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-
-             
 
                         <div  className={styles.task}>
 
@@ -194,11 +200,11 @@ function DashboardMain(){
                             <div  style={{display: "flex", flexDirection: "column"}}>
                                     <strong className={styles.taskTitle}  style ={titleStatus(task.status)}> {task.title}</strong>
                                     <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                                        <p className={styles.dueDate}> {task.dueDate}</p>
+                                        <p className={styles.dueDate}> {new Date(task.dueDate).toISOString().split('T')[0]  }</p>
 
                                   
 
-                                        <button className={styles.descriptionBtn} onClick={() => toggleDescription(task.id)}  >
+                                        <button className={styles.descriptionBtn} onClick={() => toggleDescription(task._id)}  >
 
                                             <FontAwesomeIcon icon={faEllipsis} className={styles.ellipsisIcon} />
 
@@ -216,7 +222,7 @@ function DashboardMain(){
                             <EditButton color="blueButton" task={task} loadProducts={loadProducts}></EditButton>
 
 
-                            <DeleteButton color="whiteButton" loadProducts={loadProducts}  taskId={task.id}   ></DeleteButton>
+                            <DeleteButton color="whiteButton" loadProducts={loadProducts}  taskId={task._id}   ></DeleteButton>
 
 
 
@@ -227,7 +233,7 @@ function DashboardMain(){
                                                 
 
 
-                        <div className={styles.descriptionBox}  style={{ display: selectedTaskId === task.id ? "flex" : "none" }}> 
+                        <div className={styles.descriptionBox}  style={{ display: selectedTaskId === task._id ? "flex" : "none" }}> 
 
                             <p className={styles.descriptionP}>
                                 {task.description}

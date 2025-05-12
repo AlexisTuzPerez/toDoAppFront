@@ -1,13 +1,9 @@
 
 
 
+import axios from 'axios';
 
-import axios from 'axios'
-
-
-
-const baseURL = "http://localhost:8080/api"
-
+const baseURL = import.meta.env.VITE_API_URL;
 
 export const getTasks = async () =>{
     try{
@@ -28,7 +24,7 @@ export const getTasks = async () =>{
 export const addTask = async (task) =>{
     try {
 
-        const response = await axios.post('http://localhost:8080/api/tasks', task, {
+        const response = await axios.post(baseURL +'/tasks', task, {
             withCredentials: true 
         });
 
@@ -45,7 +41,7 @@ export const addTask = async (task) =>{
 export const updateTask = async (task) =>{
     try {
 
-        await axios.put(`http://localhost:8080/api/tasks/${task.id}`, task, {
+        await axios.put(baseURL +`/tasks/${task._id}`, task, {
             withCredentials: true 
         });
         
@@ -61,7 +57,7 @@ export const deleteTask = async (taskId) =>{
 
     try {
 
-        await axios.delete(`http://localhost:8080/api/tasks/${taskId}`,{
+        await axios.delete(baseURL +`/tasks/${taskId}`,{
             withCredentials: true
         })
         

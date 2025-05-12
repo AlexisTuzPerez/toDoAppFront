@@ -12,17 +12,20 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
 
 
 
-    const nullTask ={
-
+    const nullTask = {
         title: "",
         description: "",
         priority: "",
-        dueDate:""
-     
+        dueDate: ""
     }
 
+    // Format the date when editing an existing task
+    const initialTask = typeForm === "edit" ? {
+        ...task,
+        dueDate: task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : ""
+    } : nullTask
 
-    const [formData, setFormData] = useState( typeForm == "edit" ? task : nullTask)
+    const [formData, setFormData] = useState(initialTask)
 
 
 
@@ -36,6 +39,10 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
             [name]: value
             
         }))
+
+
+
+
 
 
 

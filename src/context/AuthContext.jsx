@@ -6,9 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
-const BaseURL = 'http://localhost:8080'
 
-//const BaseURL = 'https://todoappnode-986b.onrender.com'
+const BaseURL = import.meta.env.VITE_API_URL;
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
@@ -29,7 +28,7 @@ export function AuthProvider({ children }) {
                     'Content-Type': 'application/json'
                 }
             });
-            const response = await axiosInstance.get('/api/auth/verifyAuth');
+            const response = await axiosInstance.get('/auth/verifyAuth');
             
             if (response.data && response.data.user && response.data.user.email) {
 
@@ -61,7 +60,7 @@ export function AuthProvider({ children }) {
                 }
             });
     
-            const response = await axiosInstance.post('/api/auth/authenticate', credentials);
+            const response = await axiosInstance.post('/auth/authenticate', credentials);
 
             const cookieHeader = response.headers['set-cookie'];
 
@@ -103,7 +102,7 @@ export function AuthProvider({ children }) {
     const register = async (credentials) => {
 
         try{
-            await axios.post(BaseURL+'/api/auth/register', credentials,{
+            await axios.post(BaseURL+'/auth/register', credentials,{
                 withCredentials: true
             })
 
@@ -115,9 +114,10 @@ export function AuthProvider({ children }) {
 
     const logout = async () =>{
         try {
-            await axios.post(BaseURL+'/api/auth/logout',{}, {
+            await axios.post(BaseURL+'/auth/logout', {
                 withCredentials: true
             })
+
             setUser(null)
             localStorage.clear()
 
