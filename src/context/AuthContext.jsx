@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
     const navigate = useNavigate(); 
 
     useEffect(() => {
+
         verifyAuth();
     }, []);
 

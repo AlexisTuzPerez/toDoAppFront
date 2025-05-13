@@ -19,7 +19,6 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
         dueDate: ""
     }
 
-    // Format the date when editing an existing task
     const initialTask = typeForm === "edit" ? {
         ...task,
         dueDate: task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : ""
@@ -107,9 +106,7 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
     const textareaRef = useRef(null);
     useEffect(() => {
     if (textareaRef.current) {
-        // Reset height to get the correct scrollHeight
         textareaRef.current.style.height = "auto";
-        // Set new height based on content
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
     }, [formData.description]);
@@ -122,7 +119,7 @@ function TaskForm({setModalOpen, task , typeForm,loadProducts}){
 
         <form className={styles.form}  onSubmit={handleSave}>
 
-            <strong className={styles.strong}>Add Task</strong>
+            <strong className={styles.strong}>{typeForm === "add" ? "Add Task" : "Edit Task"}</strong>
 
 
             <label htmlFor="title"> Title </label> 

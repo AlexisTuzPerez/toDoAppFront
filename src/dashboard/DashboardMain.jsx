@@ -16,7 +16,6 @@ import DeleteButton from "./deleteButton/DeleteButton"
 import EditButton from "./editButton/EditButton"
 
 
-
 import axios from "axios"
 
 
@@ -29,7 +28,7 @@ function DashboardMain(){
     const [filterText, setFilterText] = useState("All Tasks")
     const [selectedTaskId, setSelectedTaskId] = useState(null);
 
-    /* const getTasks = () => api.get("/tasks") */
+
 
   
     const loadProducts = async () =>{
@@ -46,8 +45,8 @@ function DashboardMain(){
 
 
 
-    useEffect(() =>{
-        loadProducts()
+    useEffect(() =>{      
+        loadProducts()  
     },[])
 
 
@@ -115,8 +114,8 @@ function DashboardMain(){
     const changeStatus =  async (taskToUpdate) => {
         try {
             const updatedTask = {
-                ...taskToUpdate,  // Spread existing properties
-                status: !taskToUpdate.status  // Include the flipped status
+                ...taskToUpdate,  
+                status: !taskToUpdate.status 
             };    
             await axios.put(
                 `${baseURL}/tasks/${taskToUpdate._id}`,
